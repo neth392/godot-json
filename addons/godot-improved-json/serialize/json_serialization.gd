@@ -65,12 +65,8 @@ func _ready() -> void:
 	
 	# TYPE_DICTIONARY
 	if _is_4_4_or_later:
-		# Conditionally load to prevent errors in the editor
-		var gd_script: GDScript = GDScript.new()
-		var path: String = get_script().resource_path.get_base_dir() + "/native/4_4_dictionary_json_serializer.txt"
-		gd_script.source_code = FileAccess.get_file_as_string(path)
-		gd_script.reload(false)
-		add_serializer(gd_script.new())
+		var serializer_script = preload("res://addons/godot-improved-json/serialize/native/4_4_dictionary_json_serializer.gd")
+		add_serializer(serializer_script.new())
 	else:
 		add_serializer(preload("./native/4_3_dictionary_json_serializer.gd").new())
 	
